@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('layanan', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->int('price');
+            $table->integer('price');
             $table->timestamps();
         });
     }
