@@ -49,6 +49,8 @@ Route::middleware([isBarberman::class])->group(function( ){
 Route::get('/dashboard/karyawan', function () {
     return view('dashboard-barberman');
 })->name('dashboard-barberman');
+Route::get('users/{id}/', [UserController::class, 'edit'])->name('users.edit');
+Route::put('users/{id}/edit', [UserController::class, 'update'])->name('users.update');
 Route::get('/reservation/show',[ReservationController::class, 'show'])->name('reservation.show');
 Route::delete('/reservation/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File; 
 
 class UserController extends Controller
 {
@@ -18,6 +20,7 @@ class UserController extends Controller
     public function ProcessLogin(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        Log::info("Logging in");
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
@@ -57,13 +60,14 @@ class UserController extends Controller
             'role' => 'karyawan', // default role
         ]);
 
-        $user->photo_path = 'img/default_profile.jpg';
+        $user->photo_path = 'img/default_profile.png';
         $user->save();
 
         return redirect()->route('login')->with('status', 'Registrasi berhasil. Silahkan masuk.');
     }
     public function edit($id)
     {
+        Log::info("Editing ".$id);
         // Ambil data user berdasarkan ID
         $user = User::find($id);
 
@@ -96,9 +100,14 @@ class UserController extends Controller
 
         // Proses file foto jika ada yang diunggah
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('public/photos');
+            $photo = $request->file('photo');
             // Ambil nama file dan simpan ke database
-            $user->photo_path = $photoPath;
+            
+            $fileName = time() . '_' . $photo->getClientOriginalName();
+            File::delete('assets/img/profilePicture' . $user->photo_path);
+            $photo->move(public_path('assets/img/profilePicture'), $fileName);
+
+            $user->photo_path = 'img/profilePicture/'.$fileName;
         }
 
         $user->save();
@@ -109,6 +118,8 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
+        Log::info("Logging out");
+
         Auth::logout();
 
         $request->session()->invalidate();

@@ -47,7 +47,7 @@
                 <div class="flex items-center relative">
                     @if(Auth::check())
                         <div class="flex items-center cursor-pointer" id="user-menu-button">
-                            <img src="{{ asset('public/photos' . Auth::user()->photo_path) }}" class="h-8 w-8 rounded-full object-cover" alt="User Photo">
+                            <img src="{{ asset('assets/' . Auth::user()->photo_path) }}" class="h-8 w-8 rounded-full object-cover" alt="User Photo">
                             <img src="{{ asset('assets/img/svg/arrow-down-339-svgrepo-com.svg') }}" class="h-4 w-4 ml-2" alt="Arrow Down">
                         </div>
                         <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
