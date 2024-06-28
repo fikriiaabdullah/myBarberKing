@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -60,7 +61,7 @@ class UserController extends Controller
             'role' => 'karyawan', // default role
         ]);
 
-        $user->photo_path = 'img/default_profile.png';
+        $user->photo_path = 'storage/profilePictures/default_profile.png';
         $user->save();
 
         return redirect()->route('login')->with('status', 'Registrasi berhasil. Silahkan masuk.');
@@ -104,10 +105,8 @@ class UserController extends Controller
             // Ambil nama file dan simpan ke database
             
             $fileName = time() . '_' . $photo->getClientOriginalName();
-            File::delete('assets/img/profilePicture' . $user->photo_path);
-            $photo->move(public_path('assets/img/profilePicture'), $fileName);
-
-            $user->photo_path = 'img/profilePicture/'.$fileName;
+            $filePath = $photo->storeAs('profilePictures', $fileName, 'public');
+            $user->photo_path = 'storage/' . $filePath;
         }
 
         $user->save();
