@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reservasi', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('time');
+            $table->date('time')->default(now());;
             $table->unsignedBigInteger('outlet_id');
             $table->foreign('outlet_id')->references('id')->on('outlet');
             $table->unsignedBigInteger('layanan_id');

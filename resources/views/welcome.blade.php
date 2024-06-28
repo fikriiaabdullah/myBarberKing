@@ -45,7 +45,7 @@
               <a href="#"><img src="{{ asset('assets/about-logo.png') }}" alt="" /></a>
             </div>
             <div class="brand-name">
-                Ryan Barberking
+                RYAN BARBERKING
             </div>
           </div>
         </div>

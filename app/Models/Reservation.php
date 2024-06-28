@@ -9,11 +9,14 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    protected $table = 'reservasi';
+
     protected $fillable = [
         'name',
         'time',
         'layanan_id',
         'barberman_id',
+        'outlet_id',
     ];
 
     public function layanan()
@@ -24,5 +27,9 @@ class Reservation extends Model
     public function barberman()
     {
         return $this->belongsTo(Barberman::class);
+    }
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class);
     }
 }

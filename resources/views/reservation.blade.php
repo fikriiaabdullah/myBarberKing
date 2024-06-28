@@ -4,50 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reservasi Baru</title>
-    <!-- Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <title>Reservation Table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-gray-100 py-10">
-    <div class="max-w-md mx-auto bg-white p-8 rounded shadow-lg">
-        <h2 class="text-2xl font-bold mb-4 text-center">Reservasi Baru</h2>
-        <form  class="space-y-4">
-            @csrf
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Nama</label>
-                <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="name" name="name" required>
+<body class="bg-gray-100 overflow-x-auto">
+    <div class="container mx-auto mt-10">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold mb-4">Create Reservation</h1>
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4"
+                    role="alert">
+                    <p class="text-sm">{{ session('success') }}</p>
+                </div>
+            @endif
+            <form action="{{ route('reservation.store') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" name="name" id="name"
+                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="service_time" class="block text-sm font-medium text-gray-700">Service Time</label>
+                    <input type="datetime-local" name="service_time" id="service_time"
+                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="layanan" class="block text-sm font-medium text-gray-700">Layanan</label>
+                    <select name="layanan" id="layanan"
+                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        required>
+                        @foreach($layanan as $service)
+                            <option value="{{ $service->id }}">{{ $service->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="barberman" class="block text-sm font-medium text-gray-700">Barberman</label>
+                    <select name="barberman" id="barberman"
+                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        required>
+                        @foreach($barbermen as $barberman)
+                            <option value="{{ $barberman->id }}">{{ $barberman->user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="outlet" class="block text-sm font-medium text-gray-700">Outlet</label>
+                    <select name="outlet" id="outlet"
+                            class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                            required>
+                        @foreach($outlet as $outlets)
+                            <option value="{{ $outlets->id }}">{{ $outlets->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <button type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Create
+                    Reservation</button>
+            </form>
+        </div>
+        <div class="mt-10">
+            <h1 class="text-2xl font-semibold mb-4">Reservations List</h1>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service
+                                Time</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Layanan</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barberman</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Outlet</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($reservation as $reservation)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->service_time }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->layanan->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->barberman->user->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->outlet->name }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <label for="time" class="block text-sm font-medium text-gray-700">Waktu</label>
-                <input type="datetime-local" class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="time" name="time" required>
-            </div>
-            <div>
-                <label for="layanan_id" class="block text-sm font-medium text-gray-700">Layanan</label>
-                <select class="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="layanan_id" name="layanan_id" required>
-                    <option value="1">Layanan 1</option>
-                    <option value="2">Layanan 2</option>
-                    <!-- Tambahkan opsi layanan lainnya sesuai kebutuhan -->
-                </select>
-            </div>
-            <div>
-                <label for="barberman_id" class="block text-sm font-medium text-gray-700">Barberman</label>
-                <select class="form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" id="barberman_id" name="barberman_id" required>
-                    <option value="1">Barberman 1</option>
-                    <option value="2">Barberman 2</option>
-                    <!-- Tambahkan opsi barberman lainnya sesuai kebutuhan -->
-                </select>
-            </div>
-            <div>
-                <button type="submit" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Reservasi
-                </button>
-            </div>
-        </form>
+        </div>
     </div>
 
-    <!-- Tailwind CSS (Jika Anda ingin menambahkan lebih banyak styling) -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.js"></script> -->
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <script src="{{ asset('assets/js/jplugins.js') }}"></script>
+    <script src="{{ asset('assets/js/init.js') }}"></script>
 </body>
 
 </html>

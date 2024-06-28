@@ -14,6 +14,7 @@ Route::get('/', function () {
 })->name('welcome');
 Route::get('/login',[UserController::class, 'login'])->name('login');
 Route::get('/reservation',[ReservationController::class, 'reservation'])->name('reservation');
+Route::post('/reservation/create',[ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/login', [UserController::class, 'processLogin'])->name('processLogin');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::middleware(['auth'])->group(function() {
@@ -38,11 +39,18 @@ Route::middleware([isAdmin::class])->group(function( ){
     Route::get('/outlet/{outlet}/edit', [OutletController::class, 'edit'])->name('outlet.edit');
     Route::put('/outlet/{outlet}', [OutletController::class, 'update'])->name('outlet.update');
     Route::delete('/outlet/{outlet}', [OutletController::class, 'destroy'])->name('outlet.destroy');
+    Route::get('/barberman/create',[BarbermanController::class, 'create'])->name('barberman.create');
+    Route::post('/barberman', [BarbermanController::class, 'store'])->name('barberman.store');
+    Route::get('/barberman/{barberman}/edit', [BarbermanController::class, 'edit'])->name('barberman.edit');
+    Route::put('/barberman/edit', [BarbermanController::class, 'update'])->name('barberman.update');
+    Route::delete('/barberman/{barberman}', [BarbermanController::class, 'destroy'])->name('barberman.destroy');
 });
 Route::middleware([isBarberman::class])->group(function( ){
 Route::get('/dashboard/karyawan', function () {
     return view('dashboard-barberman');
 })->name('dashboard-barberman');
+Route::get('/reservation/show',[ReservationController::class, 'show'])->name('reservation.show');
+Route::delete('/reservation/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });
 
 

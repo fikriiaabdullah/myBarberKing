@@ -61,7 +61,6 @@
                         <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800">Login</a>
                     @endif
                 </div>
-                </div>
             </div>
         </div>
     </nav>
@@ -80,7 +79,7 @@
                 <li><a href="{{ route('layanan') }}" class="block py-2 px-4 text-sm hover:bg-gray-700">Layanan</a></li>
                 <li><a href="{{ route('outlet') }}" class="block py-2 px-4 text-sm hover:bg-gray-700">Outlet</a></li>
             @elseif(Auth::check() && Auth::user()->role === 'barberman')
-                <li><a href="{{ route('reservation') }}" class="block py-2 px-4 text-sm hover:bg-gray-700">Reservasi</a></li>
+                <li><a href="{{ route('reservation.show') }}" class="block py-2 px-4 text-sm hover:bg-gray-700">Reservasi</a></li>
             @endif
         </ul>
     </aside>
