@@ -8,8 +8,8 @@
 }
 
 body{
-    background-color: #5b5352;
-    background: linear-gradient(to right, #e2e2e2, #2d2d2f);
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #4e30099a);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,6 +26,7 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    height: 100vh;
 }
 
 .container p{
@@ -47,7 +48,7 @@ body{
 }
 
 .container button{
-    background-color: #3f3e40;
+    background-color: rgb(229, 190, 128); /* Warna tombol berubah menjadi merah */
     color: #fff;
     font-size: 12px;
     padding: 10px 45px;
@@ -58,9 +59,6 @@ body{
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
-}
-.container button:hover{
-    background-color: #6a686d;
 }
 
 .container button.hidden{
@@ -113,12 +111,21 @@ body{
     z-index: 1;
 }
 
-.notification {
-    background-color: #f2dede;
-    color: #a94442;
+.alert {
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #8f6128;
+    color: #4d300c;
     padding: 10px;
+    margin-top: 10px;
     border-radius: 8px;
-    margin-bottom: 20px; /* Tambahkan margin antara pesan notifikasi dan form */
+    margin-bottom: 10px; /* Tambahkan margin antara pesan notifikasi dan form */
 }
 
 .container.active .sign-up{
@@ -172,9 +179,9 @@ body{
 }
 
 .toggle{
-    background-color: #353436;
+    background-color: #764a109a;
     height: 100%;
-    background: linear-gradient(to right, #717174, #373535);
+    background: linear-gradient(to right, #c8beb4, #5a380c9a);
     color: #fff;
     position: relative;
     left: -100%;
@@ -201,9 +208,6 @@ body{
     top: 0;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-}
-.toggle-panel .hidden:hover {
-    background-color: #474949; /* Warna tombol saat dihover */
 }
 
 .toggle-left{

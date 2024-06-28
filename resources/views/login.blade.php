@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
     <title>Modern Login Page</title>
 </head>
 
@@ -26,8 +26,7 @@
                 <input type="text" name="name" placeholder="Name" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <input type="password" name="password_confirmation" placeholder="Confirm Password" required>
-                <input type="role" name="role" placeholder="Role" required>
+                <input type="phone" name="phone" placeholder="Phone" required>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
@@ -58,7 +57,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('assets/script.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>
