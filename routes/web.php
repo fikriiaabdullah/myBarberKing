@@ -33,6 +33,11 @@ Route::middleware([isAdmin::class])->group(function( ){
     Route::get('/layanan/{layanan}/edit', [LayananController::class, 'edit'])->name('layanan.edit');
     Route::put('/layanan/{layanan}', [LayananController::class, 'update'])->name('layanan.update');
     Route::delete('/layanan/{layanan}', [LayananController::class, 'destroy'])->name('layanan.destroy');
+    Route::get('/outlet/create',[OutletController::class, 'create'])->name('outlet.create');
+    Route::post('/outlet', [OutletController::class, 'store'])->name('outlet.store');
+    Route::get('/outlet/{outlet}/edit', [OutletController::class, 'edit'])->name('outlet.edit');
+    Route::put('/outlet/{outlet}', [OutletController::class, 'update'])->name('outlet.update');
+    Route::delete('/outlet/{outlet}', [OutletController::class, 'destroy'])->name('outlet.destroy');
 });
 Route::middleware([isBarberman::class])->group(function( ){
 Route::get('/dashboard/karyawan', function () {
