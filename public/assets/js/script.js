@@ -9,3 +9,8 @@ registerBtn.addEventListener('click', () => {
 loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add('opened');
+});
+
