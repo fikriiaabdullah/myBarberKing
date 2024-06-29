@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_dashboard')
 
 @section('title', 'Reservations')
 
@@ -34,9 +34,5 @@
             </div>
         @endforeach
     </div>
-</div>
-
-<div class="flex justify-between items-center mb-2 mt-8">
-    <a href="{{ route('reservation.show') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Tambah Reservasi</a>
 </div>
 @endsection

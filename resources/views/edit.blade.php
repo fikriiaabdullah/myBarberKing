@@ -1,6 +1,6 @@
 <!-- resources/views/users/edit.blade.php -->
 
-@extends('layouts.app')
+@extends('layouts.app_dashboard')
 
 @section('title', 'Edit Profile')
 

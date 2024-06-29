@@ -1,6 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.app_dashboard')
 
 @section('title', 'Barberman')
+
+@section('styles')
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+@endsection
 
 @section('content')
     @if (session('success'))
@@ -8,7 +12,7 @@
             <p class="text-sm">{{ session('success') }}</p>
         </div>
     @endif
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white rounded-lg shadow-md p-6" style="background-color: white; ">
         <h2 class="text-2xl font-semibold mb-4">Barberman Page</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
