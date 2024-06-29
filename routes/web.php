@@ -48,9 +48,7 @@ Route::middleware([isAdmin::class])->group(function( ){
     Route::delete('/barberman/{barberman}', [BarbermanController::class, 'destroy'])->name('barberman.destroy');
 });
 Route::middleware([isBarberman::class])->group(function( ){
-    Route::get('/dashboard/barberman', function () {
-        return view('dashboard-barberman');
-    })->name('dashboard-barberman');
+    Route::get('/dashboard/barberman', [BarbermanController::class, 'count'])->name('dashboard-barberman');
     Route::get('/reservation/show',[ReservationController::class, 'show'])->name('reservation.show');
     Route::delete('/reservation/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });

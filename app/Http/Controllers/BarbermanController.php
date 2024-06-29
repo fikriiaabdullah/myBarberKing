@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Outlet;
 use App\Models\Barberman;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BarbermanController extends Controller
 {
@@ -14,6 +16,17 @@ class BarbermanController extends Controller
         $barbermen = Barberman::with('user')->get(); // Ambil semua barberman beserta data user-nya
 
         return view('barberman', compact('barbermen'));
+    }
+    public function count()
+    {
+        $barberman = Barberman::where('user_id', Auth::id())->first();
+
+        $reservationCount = Reservation::where('barberman_id', $barberman->id)
+                                   ->whereDate('created_at', today())
+                                   ->count();
+
+    // Kirim data ke view
+    return view('dashboard-barberman', compact('reservationCount'));
     }
     public function create()
     {

@@ -35,38 +35,67 @@
 						Pages
 					</li>
             @if(Auth::check() && Auth::user()->role === 'admin')
-                        <li class="sidebar-item active">
+                        <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('barberman') }}">
-                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Barberman</span>
-                </a>
+                                <div class="d-flex align-items-center">
+                                    <i class="align-middle" data-feather="user"></i>
+                                    <span class="align-middle ms-2">Barberman</span>
+                                </div>
+                            </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('layanan') }}">
-                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Layanan</span>
-                </a>
+                                <div class="d-flex align-items-center">
+                                    <i class="align-middle" data-feather="tool"></i>
+                                    <span class="align-middle ms-2">Layanan</span>
+                                </div>
+                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('outlet') }}">
-                <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Outlet</span>
-                </a>
-                        </li>
+                                <div class="d-flex align-items-center">
+                                    <i class="align-middle" data-feather="home"></i>
+                                    <span class="align-middle ms-2">Outlet</span>
+                                </div>
+                            </a>
                         </li>
             @elseif(Auth::check() && Auth::user()->role === 'barberman')
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('reservation.show') }}">
-                <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Reservation</span>
-                </a>
+                                <div class="d-flex align-items-center">
+                                    <i class="align-middle" data-feather="bookmark"></i>
+                                    <span class="align-middle ms-2">Reservation</span>
+                                </div>
+                            </a>
                         </li>
             @endif
+            <ul class="sidebar-nav">
+                <li class="sidebar-header">
+                    Activity
+                </li>
+                <li class="sidebar-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="sidebar-link">
+                            <div class="d-flex align-items-center">
+                                <i class="align-middle" data-feather="log-out"></i>
+                                <span class="align-middle ms-2">Logout</span>
+                            </div>
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+
 		</nav>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
+                <i class="hamburger align-self-center"></i>
+                </a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -74,12 +103,12 @@
 							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
 									<i class="align-middle" data-feather="bell"></i>
-									<span class="indicator">4</span>
+									<span></span>
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
 								<div class="dropdown-menu-header">
-									4 New Notifications
+									Notifications
 								</div>
 								<div class="list-group">
 									<a href="#" class="list-group-item">
@@ -136,17 +165,26 @@
 							</div>
 						</li>
 
-							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                                <img src="{{ asset(Auth::user()->photo_path) }}" class="avatar img-responsive me-1" alt="{{ Auth::user()->name }}" /> <span class="text-dark">{{ Auth::user()->name }}</span>
-                            </a>
-							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<div class="dropdown-divider"></div>
-								<form method="POST" action="{{ route('logout') }}" class="dropdown-item">
-                                    @csrf
-                                    <button type="submit" style="text-decoration: none; border: none; background-color:transparent;">Logout</button>
-                                </form>
-							</div>
+                        <a class="nav-link d-none d-sm-inline-block d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset(Auth::user()->photo_path) }}" class="avatar img-responsive me-2 rounded-full" alt="{{ Auth::user()->name }}" />
+                                <span class="text-dark indicator">{{ Auth::user()->name }}</span>
+                                <img src="{{ asset('assets/img/svg/arrow-down-339-svgrepo-com.svg') }}" class="h-3 w-3 ml-2" alt="Arrow Down">
+                            </div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" style="animation-duration: 1s;">
+                            <div class="d-flex align-items-center">
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <form method="POST" action="{{ route('logout') }}" class="dropdown-item">
+                                @csrf
+                                <button type="submit" style="text-decoration: none; border: none; background-color:transparent;">Logout</button>
+                            </form>
+                        </div>
+
+                    </ul>
 				</div>
 			</nav>
 
