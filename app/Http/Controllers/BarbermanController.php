@@ -53,15 +53,16 @@ class BarbermanController extends Controller
         return view('barberman-edit', compact('barberman', 'outlets'));
     }
 
-    public function update(Request $request, Barberman $barbermen)
+    public function update(Request $request, Barberman $barberman)
     {
         // Validate the request
         $request->validate([
-            'outlet_id' => 'required|exists:outlet,id',
+            'outlet_id' => 'required|exists:outlet,id', // Correct the table name to outlet
         ]);
-
         // Update the barberman outlet
-        $barbermen->update(['outlet_id' => $request->outlet_id]);
+        $barberman->update([
+            'outlet_id' => $request->outlet_id,
+        ]);
 
         return redirect()->route('barberman')->with('success', 'Barberman updated successfully.');
     }

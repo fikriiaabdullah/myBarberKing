@@ -46,7 +46,7 @@ Route::middleware([isAdmin::class])->group(function( ){
     Route::get('/barberman/create',[BarbermanController::class, 'create'])->name('barberman.create');
     Route::post('/barberman', [BarbermanController::class, 'store'])->name('barberman.store');
     Route::get('/barberman/{barberman}/edit', [BarbermanController::class, 'edit'])->name('barberman.edit');
-    Route::put('/barberman/edit', [BarbermanController::class, 'update'])->name('barberman.update');
+    Route::put('/barberman/{barberman}', [BarbermanController::class, 'update'])->name('barberman.update');
     Route::delete('/barberman/{barberman}', [BarbermanController::class, 'destroy'])->name('barberman.destroy');
 });
 Route::middleware([isBarberman::class])->group(function( ){
