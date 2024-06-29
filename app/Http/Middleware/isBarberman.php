@@ -20,6 +20,6 @@ class isBarberman
             return $next($request);
         }
 
-        return redirect('/dashboard/karyawan');
+        return redirect('/dashboard/barberman');
     }
 }
