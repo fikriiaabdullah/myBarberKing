@@ -17,15 +17,19 @@ Route::get('/reservation',[ReservationController::class, 'reservation'])->name('
 Route::post('/reservation/create',[ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/login', [UserController::class, 'processLogin'])->name('processLogin');
 Route::post('/register', [UserController::class, 'register'])->name('register');
+
 Route::middleware(['auth'])->group(function() {
     Route::post('/logout',[UserController::class, 'logout'])->name('logout');
+    Route::get('users/{id}/', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('users/{id}/edit', [UserController::class, 'update'])->name('users.update');
+    Route::get('/dashboard/karyawan', function () {
+        return view('dashboard-karyawan');
+    })->name('dashboard-karyawan');
 });
 Route::middleware([isAdmin::class])->group(function( ){
     Route::get('/dashboard', function () {
         return view('dashboard-admin');
     })->name('dashboard-admin');
-    Route::get('users/{id}/', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('users/{id}/edit', [UserController::class, 'update'])->name('users.update');
     Route::get('/barberman', [BarbermanController::class, 'index'])->name('barberman');
     Route::get('/outlet', [OutletController::class, 'index'])->name('outlet');
     Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
@@ -46,13 +50,11 @@ Route::middleware([isAdmin::class])->group(function( ){
     Route::delete('/barberman/{barberman}', [BarbermanController::class, 'destroy'])->name('barberman.destroy');
 });
 Route::middleware([isBarberman::class])->group(function( ){
-Route::get('/dashboard/karyawan', function () {
-    return view('dashboard-barberman');
-})->name('dashboard-barberman');
-Route::get('users/{id}/', [UserController::class, 'edit'])->name('users.edit');
-Route::put('users/{id}/edit', [UserController::class, 'update'])->name('users.update');
-Route::get('/reservation/show',[ReservationController::class, 'show'])->name('reservation.show');
-Route::delete('/reservation/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/dashboard/barberman', function () {
+        return view('dashboard-barberman');
+    })->name('dashboard-barberman');
+    Route::get('/reservation/show',[ReservationController::class, 'show'])->name('reservation.show');
+    Route::delete('/reservation/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });
 
 

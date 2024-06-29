@@ -46,22 +46,29 @@ class BarbermanController extends Controller
 
         return redirect()->route('barberman')->with('success', 'Barberman created successfully!');
     }
-    public function edit(Barberman $barbermen)
+    public function edit(Barberman $barberman)
     {
-        return view('barberman-edit', compact('barbermen'));
+        $barberman->load('user', 'outlet');
+        $outlets = Outlet::all(); // Retrieve all outlets to populate the dropdown
+        return view('barberman-edit', compact('barberman', 'outlets'));
     }
 
     public function update(Request $request, Barberman $barbermen)
     {
-        // Validation if needed
-        $barbermen->update($request->only(['name', 'outlet']));
+        // Validate the request
+        $request->validate([
+            'outlet_id' => 'required|exists:outlet,id',
+        ]);
+
+        // Update the barberman outlet
+        $barbermen->update(['outlet_id' => $request->outlet_id]);
 
         return redirect()->route('barberman')->with('success', 'Barberman updated successfully.');
     }
 
-    public function destroy(Barberman $barbermen)
+    public function destroy(Barberman $barberman)
     {
-        $barbermen->delete();
+        $barberman->delete();
         return redirect()->route('barberman')->with('success', 'Barberman deleted successfully.');
     }
 

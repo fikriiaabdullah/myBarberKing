@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -27,11 +27,11 @@ class UserController extends Controller
             $user = Auth::user();
             if ($user->role == 'admin') {
                 return redirect()->route('dashboard-admin');
-            } else if ($user->role == 'barberman' || $user->role == 'karyawan') {
+            } else if ($user->role == 'barberman') {
                 return redirect()->route('dashboard-barberman');
             } else {
                 // Handle other roles as needed, for example redirecting to a general dashboard
-                return redirect()->route('dashboard-barberman');
+                return redirect()->route('dashboard-karyawan');
             }
         }
 
@@ -103,7 +103,7 @@ class UserController extends Controller
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             // Ambil nama file dan simpan ke database
-            
+
             $fileName = time() . '_' . $photo->getClientOriginalName();
             $filePath = $photo->storeAs('profilePictures', $fileName, 'public');
             $user->photo_path = 'storage/' . $filePath;
