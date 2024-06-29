@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Outlet;
+use App\Models\Layanan;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -38,6 +41,21 @@ class UserController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+    public function count()
+    {
+        $barbermenCount = User::where('role', 'barberman')->count();
+
+        // Hitung jumlah outlet
+        $outletCount = Outlet::count();
+
+        // Hitung jumlah reservasi
+        $reservationCount = Reservation::count();
+
+        $layananCount = Layanan::count();
+
+        // Kirim data ke view
+        return view('dashboard-admin', compact('barbermenCount', 'outletCount', 'reservationCount', 'layananCount'));
     }
 
     public function register(Request $request)

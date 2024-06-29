@@ -1,6 +1,5 @@
 @extends('layouts.app_dashboard')
 
-
 @section('content')
 <h1 class="h3 mb-3"><strong>Admin</strong> Dashboard</h1>
 
@@ -16,11 +15,11 @@
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="truck"></i>
+                                    <i class="align-middle" data-feather="users"></i>
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">2.382</h1>
+                        <h1 class="mt-1 mb-3">{{ $barbermenCount }}</h1>
                         <div class="mb-0">
                             <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -3.65%</span>
                             <span class="text-muted">Since last week</span>
@@ -37,11 +36,11 @@
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="users"></i>
+                                    <i class="align-middle" data-feather="home"></i>
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">14.212</h1>
+                        <h1 class="mt-1 mb-3">{{ $outletCount }}</h1>
                         <div class="mb-0">
                             <span class="text-success"><i class="mdi mdi-arrow-bottom-right"></i> 5.25%</span>
                             <span class="text-muted">Since last week</span>
@@ -58,13 +57,13 @@
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="dollar-sign"></i>
+                                    <i class="align-middle" data-feather="tool"></i>
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">$21.300</h1>
+                        <h1 class="mt-1 mb-3">{{ $layananCount }}</h1>
                         <div class="mb-0">
-                            <span class="text-success"><i class="mdi mdi-arrow-bottom-right"></i> 6.65%</span>
+                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
                             <span class="text-muted">Since last week</span>
                         </div>
                     </div>
@@ -79,11 +78,11 @@
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
-                                    <i class="align-middle" data-feather="shopping-cart"></i>
+                                    <i class="align-middle" data-feather="file-text"></i>
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">64</h1>
+                        <h1 class="mt-1 mb-3">{{ $reservationCount }}</h1>
                         <div class="mb-0">
                             <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
                             <span class="text-muted">Since last week</span>
@@ -94,7 +93,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="container-fluid p-0">
     <div class="row">
@@ -124,5 +122,5 @@
         </div>
     </div>
 </div>
-@endsection
 
+@endsection

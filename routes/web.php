@@ -27,9 +27,7 @@ Route::middleware(['auth'])->group(function() {
     })->name('dashboard-karyawan');
 });
 Route::middleware([isAdmin::class])->group(function( ){
-    Route::get('/dashboard', function () {
-        return view('dashboard-admin');
-    })->name('dashboard-admin');
+    Route::get('/dashboard', [UserController::class, 'count'])->name('dashboard-admin');
     Route::get('/barberman', [BarbermanController::class, 'index'])->name('barberman');
     Route::get('/outlet', [OutletController::class, 'index'])->name('outlet');
     Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
