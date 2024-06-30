@@ -33,7 +33,6 @@ class UserController extends Controller
             } else if ($user->role == 'barberman') {
                 return redirect()->route('dashboard-barberman');
             } else {
-                // Handle other roles as needed, for example redirecting to a general dashboard
                 return redirect()->route('dashboard-karyawan');
             }
         }
@@ -54,8 +53,14 @@ class UserController extends Controller
 
         $layananCount = Layanan::count();
 
+        $notificationData = '';
+        $user = Auth::user();
+        if($user->role == 'admin'){
+            $notificationData = User::where('role', 'karyawan')->pluck('name');
+        }
+
         // Kirim data ke view
-        return view('dashboard-admin', compact('barbermenCount', 'outletCount', 'reservationCount', 'layananCount'));
+        return view('dashboard-admin', compact('barbermenCount', 'outletCount', 'reservationCount', 'layananCount', 'notificationData'));
     }
 
     public function register(Request $request)

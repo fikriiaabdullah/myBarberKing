@@ -1,5 +1,19 @@
 @extends('layouts.app_dashboard')
 
+@section('notifications')
+    <a href="#" class="list-group-item">
+        <div class="row g-0 align-items-center">
+            <div class="col-2">
+                <i class="text-warning" data-feather="bell"></i>
+            </div>
+            <div class="col-10">
+                <div class="text-dark">Approval status</div>
+                <div class="text-muted small mt-1">Your application is pending approval by the honorable admin</div>
+                <div class="text-muted small mt-1">After world war II</div>
+            </div>
+        </div>
+    </a>
+@endsection
 
 @section('content')
 <h1 class="h3 mb-3"><strong>Admin</strong> Dashboard</h1>
