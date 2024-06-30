@@ -13,8 +13,11 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach ($outlet as $item)
-                <div class="col-span-4 border p-4 rounded-md shadow-md flex justify-between items-center">
+                <div class="col-span-4 border p-4 rounded-md shadow-md flex gap-1 items-center">
                     <div>
+                        <img style="max-width: 150px; height: auto; clip-path: xywh(0 5px 100% 75% round 15% 0);" src="{{asset($item->photo_path)}}">
+                    </div>
+                    <div class="flex-grow">
                         <h3 class="font-semibold">{{ $item->name }}</h3>
                         <p>Location : {{ $item->address }}</p>
                     </div>

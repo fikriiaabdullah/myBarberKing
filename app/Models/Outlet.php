@@ -14,5 +14,6 @@ class Outlet extends Model
     protected $fillable = [
         'name',
         'address',
+        'photo_path'
     ];
 }
