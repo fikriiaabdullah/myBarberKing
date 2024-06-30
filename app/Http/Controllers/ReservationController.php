@@ -51,6 +51,6 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation)
     {
         $reservation->delete();
-        return redirect()->route('reservation')->with('success', 'Reservation deleted successfully.');
+        return redirect()->route('reservation.show')->with('success', 'Reservation deleted successfully.');
     }
 }

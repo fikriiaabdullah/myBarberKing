@@ -1,5 +1,22 @@
 @extends('layouts.app_dashboard')
 
+@section('notifications')
+    @foreach ($notificationData as $notification)
+        <a href="#" class="list-group-item">
+            <div class="row g-0 align-items-center">
+                <div class="col-2">
+                    <i class="text-warning" data-feather="bell"></i>
+                </div>
+                <div class="col-10">
+                    <div class="text-dark">New user</div>
+                    <div class="text-muted small mt-1">{{$notification}} is pending approval</div>
+                    <div class="text-muted small mt-1">2h ago</div>
+                </div>
+            </div>
+        </a>
+    @endforeach
+@endsection
+
 @section('content')
 <h1 class="h3 mb-3"><strong>Admin</strong> Dashboard</h1>
 

@@ -8,6 +8,7 @@ use App\Models\Barberman;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class BarbermanController extends Controller
 {
@@ -25,8 +26,10 @@ class BarbermanController extends Controller
                                    ->whereDate('created_at', today())
                                    ->count();
 
+        $notificationData = Reservation::select('name', 'time')->where('barberman_id', $barberman->id)->get();
+
     // Kirim data ke view
-    return view('dashboard-barberman', compact('reservationCount'));
+    return view('dashboard-barberman', compact('reservationCount', 'notificationData'));
     }
     public function create()
     {
