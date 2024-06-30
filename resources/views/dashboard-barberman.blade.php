@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">{{ $reservationCount }}</h1>
+                        <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $reservationCount }}</h1>
                         <div class="mb-0">
                             <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
                             <span class="text-muted">Since last week</span>
