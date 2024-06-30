@@ -117,7 +117,7 @@
 								</div>
 							</div>
 						</li>
-
+                    <li class="dropdown">
                         <a class="nav-link d-none d-sm-inline-block d-flex align-items-center" href="#" data-bs-toggle="dropdown">
                             <div class="d-flex align-items-center">
                                 <img src="{{ asset(Auth::user()->photo_path) }}" class="avatar img-responsive me-2 rounded-full" alt="{{ Auth::user()->name }}" />
@@ -126,14 +126,14 @@
                             </div>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" style="animation-duration: 1s;">
+                        <div class="dropdown-menu dropdown-menu-end">
                             <div class="d-flex align-items-center">
                                 <a class="dropdown-item d-flex align-items-center" href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                             </div>
                             <div class="dropdown-divider"></div>
                             <form method="POST" action="{{ route('logout') }}" class="dropdown-item">
                                 @csrf
-                                <button type="submit" style="text-decoration: none; border: none; background-color:transparent;">Logout</button>
+                                <button type="submit" class="dropdown-item"style="text-decoration: none; border: none; background-color:transparent;">Logout</button>
                             </form>
                         </div>
 
