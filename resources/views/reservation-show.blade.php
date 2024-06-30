@@ -8,6 +8,9 @@
         <p class="text-sm">{{ session('success') }}</p>
     </div>
 @endif
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    import Swal from 'sweetalert2'
+</script>
 
 <div class="bg-white rounded-lg shadow-md p-6">
     <h2 class="text-2xl font-semibold mb-4">Reservations Page</h2>
@@ -23,7 +26,13 @@
                     <p>Outlet: {{ $item->outlet->name }}</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <form action="{{ route('reservation.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <form action="{{ route('reservation.destroy', $item->id) }}" method="POST" onsubmit="Swal.fire({
+                            title: 'Confirm',
+                            text: 'Are you sure you want to delete this reservation',
+                            icon: 'question',
+                            confirmButtonText: 'Use Ask',
+                            showCancelButton: 'true'
+                        })">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-500 hover:text-red-700 mr-5">
