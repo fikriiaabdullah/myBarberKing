@@ -2,4 +2,5 @@
 *
 # But not these directories and files
 !profilePictures/
+!outletPictures/
 !.gitignore
