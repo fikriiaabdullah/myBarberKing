@@ -1,5 +1,5 @@
 # Ignore everything
 *
 # But not these directories and files
-!profilePictures/
+!default_profile.png
 !.gitignore
