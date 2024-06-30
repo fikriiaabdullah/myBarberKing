@@ -27,8 +27,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col mt-0">
-                                <h5 class="card-title">Barberman</h5>
+                            <div class="col mt-0 ">
+                                <h5 class="card-title"  style="font-size: 1rem;">Barberman</h5>
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
@@ -36,9 +36,9 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">{{ $barbermenCount }}</h1>
+                        <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $barbermenCount }}</h1>
                         <div class="mb-0">
-                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -3.65%</span>
+                            <span class="text-danger" style="font-size: 1rem;"><i class="mdi mdi-arrow-bottom-right"></i> -3.65%</span>
                             <span class="text-muted">Since last week</span>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                <h5 class="card-title">Outlet</h5>
+                                <h5 class="card-title"  style="font-size: 1rem;">Outlet</h5>
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">{{ $outletCount }}</h1>
+                        <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $outletCount }}</h1>
                         <div class="mb-0">
                             <span class="text-success"><i class="mdi mdi-arrow-bottom-right"></i> 5.25%</span>
                             <span class="text-muted">Since last week</span>
@@ -70,7 +70,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                <h5 class="card-title">Layanan</h5>
+                                <h5 class="card-title"  style="font-size: 1rem;">Layanan</h5>
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
@@ -78,7 +78,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">{{ $layananCount }}</h1>
+                        <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $layananCount }}</h1>
                         <div class="mb-0">
                             <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
                             <span class="text-muted">Since last week</span>
@@ -91,7 +91,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col mt-0">
-                                <h5 class="card-title">Reservation</h5>
+                                <h5 class="card-title"  style="font-size: 1rem;">Reservation</h5>
                             </div>
                             <div class="col-auto">
                                 <div class="stat text-primary">
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">{{ $reservationCount }}</h1>
+                        <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $reservationCount }}</h1>
                         <div class="mb-0">
                             <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
                             <span class="text-muted">Since last week</span>
