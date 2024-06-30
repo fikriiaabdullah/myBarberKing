@@ -17,8 +17,11 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach($barbermen as $barberman)
-                <div class="col-span-4 border p-4 rounded-md shadow-md flex justify-between items-center">
+                <div class="col-span-4 border p-4 rounded-md shadow-md flex items-center">
                     <div>
+                        <img style="max-width: 150px; height: auto; clip-path: circle();" src="{{asset($barberman->user->photo_path)}}">
+                    </div>
+                    <div class="flex-grow">
                         <h3 class="font-semibold text-lg">{{ $barberman->user->name }}</h3>
                         <p class="text-gray-500">{{ $barberman->user->email }}</p>
                         <p class="text-gray-500">Outlet: {{ $barberman->outlet->name }}</p>
