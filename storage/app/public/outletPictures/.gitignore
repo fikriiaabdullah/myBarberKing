@@ -1,6 +1,5 @@
 # Ignore everything
 *
 # But not these directories and files
-!profilePictures/
-!outletPictures/
+!default_house.jpg
 !.gitignore

@@ -7,18 +7,47 @@ use App\Models\Layanan;
 use App\Models\Barberman;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ReservationController extends Controller
 {
-    public function Reservation()
+    public function Reservation(Request $request)
     {
+        $request->validate([
+            'service_time' => 'required|date',
+            'layanan' => 'required|exists:layanan,id',
+            'barberman' => 'required|exists:barberman,id',
+            'outlet' => 'required|exists:outlet,id',
+        ]);
+
         $reservation = Reservation::with('layanan', 'barberman')->latest()->get();
-        $layanan = Layanan::all();
-        $barbermen = Barberman::with('user')->get();
+        $layanan = $request->layanan;
+        $barbermen = $request->barberman;
+        $outlet = $request->outlet;
+        $service_time = $request->service_time;
+        Log::info($outlet);
+
+        return view('reservation', compact('layanan', 'barbermen', 'outlet', 'service_time'));
+    }
+
+    public function chooseOutlet()
+    {
         $outlet = Outlet::all();
 
-        return view('reservation', compact('reservation', 'layanan', 'barbermen', 'outlet'));
+        return view('reservation-outlet', compact('outlet'));
+    }
+    public function chooseServiceBarberman(Request $request)
+    {
+        $request->validate([
+            'outlet' => 'required|exists:outlet,id'
+        ]);
 
+        $reservation = Reservation::with('layanan', 'barberman')->latest()->get();
+        $layanan = Layanan::all();
+        $barbermen = Barberman::where('outlet_id', $request->outlet)->get();
+        $outlet = $request->outlet;
+
+        return view('reservation-service-barberman', compact('outlet', 'layanan', 'barbermen', 'reservation'));
     }
     public function show()
     {
@@ -36,6 +65,7 @@ class ReservationController extends Controller
             'layanan' => 'required|exists:layanan,id',
             'barberman' => 'required|exists:barberman,id',
             'outlet' => 'required|exists:outlet,id',
+            'phone' => 'required|regex:/^[0-9]+$/'
         ]);
 
         $reservation = Reservation::create([
@@ -44,9 +74,10 @@ class ReservationController extends Controller
             'layanan_id' => $request->layanan,
             'barberman_id' => $request->barberman,
             'outlet_id' => $request->outlet,
+            'phone_number' => $request->phone
         ]);
 
-        return redirect()->back()->with('success', 'Reservation created successfully!');
+        return redirect()->route('reservation.outlet')->with('success', 'Reservation created successfully!');
     }
     public function destroy(Reservation $reservation)
     {

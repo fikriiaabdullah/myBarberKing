@@ -63,7 +63,7 @@
                 <div class="services">
                   <ul>
                     <li>
-                      <a href="{{ route('reservation') }}">
+                      <a href="{{ route('reservation.outlet') }}">
                         <img class="image" src="{{ asset('assets/about-1.jpg') }}" alt="" />
                         <span>Reservation</span>
                         <img class="svg" src="{{asset('assets/img/svg/right-arrow.svg')}}" alt="" />

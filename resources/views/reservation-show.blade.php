@@ -20,7 +20,8 @@
             <div class="col-span-4 border p-4 rounded-md shadow-md flex justify-between items-center">
                 <div>
                     <h3 class="font-semibold">{{ $item->name }}</h3>
-                    <p>Service Time: {{ $item->service_time }}</p>
+                    <p>Phone: {{$item->phone_number}}</p>
+                    <p>Service Time: {{ $item->time }}</p>
                     <p>Layanan: {{ $item->layanan->name }}</p>
                     <p>Barberman: {{ $item->barberman->user->name }}</p>
                     <p>Outlet: {{ $item->outlet->name }}</p>

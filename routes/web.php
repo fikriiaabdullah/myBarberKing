@@ -13,6 +13,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::get('/login',[UserController::class, 'login'])->name('login');
+Route::get('/reservation/outlet',[ReservationController::class, 'chooseOutlet'])->name('reservation.outlet');
+Route::get('/reservation/service-barberman',[ReservationController::class, 'chooseServiceBarberman'])->name('reservation.service.barberman');
 Route::get('/reservation',[ReservationController::class, 'reservation'])->name('reservation');
 Route::post('/reservation/create',[ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/login', [UserController::class, 'processLogin'])->name('processLogin');
