@@ -8,6 +8,7 @@ use App\Models\Barberman;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -42,7 +43,7 @@ class ReservationController extends Controller
             'outlet' => 'required|exists:outlet,id'
         ]);
 
-        $reservation = Reservation::with('layanan', 'barberman')->latest()->get();
+        $reservation = Reservation::select('time', 'layanan_id', 'barberman_id')->where('outlet_id', $request->outlet)->get();
         $layanan = Layanan::all();
         $barbermen = Barberman::where('outlet_id', $request->outlet)->get();
         $outlet = $request->outlet;
@@ -51,7 +52,9 @@ class ReservationController extends Controller
     }
     public function show()
     {
-        $reservation = Reservation::all(); // Adjust this according to your actual retrieval logic
+        $barberman = Barberman::where('user_id', Auth::id())->first();
+        Log::info($barberman->id);
+        $reservation = Reservation::where('barberman_id', $barberman->id)->get(); // Adjust this according to your actual retrieval logic
 
         return view('reservation-show', [
             'reservation' => $reservation,
@@ -61,7 +64,7 @@ class ReservationController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'service_time' => 'required|date',
+            'service_time' => 'required|date_format:Y-m-d\TH:i',
             'layanan' => 'required|exists:layanan,id',
             'barberman' => 'required|exists:barberman,id',
             'outlet' => 'required|exists:outlet,id',
@@ -70,7 +73,7 @@ class ReservationController extends Controller
 
         $reservation = Reservation::create([
             'name' => $request->name,
-            'service_time' => $request->service_time,
+            'time' => $request->service_time,
             'layanan_id' => $request->layanan,
             'barberman_id' => $request->barberman,
             'outlet_id' => $request->outlet,

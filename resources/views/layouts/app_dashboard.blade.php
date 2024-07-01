@@ -7,7 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="AdminKit">
-	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+	<meta name="keywords"
+		content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
@@ -18,84 +19,102 @@
 
 	<link href="{{asset('static/css/app.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+	<script>
+		function confirmLogout() {
+			console.log('logout attempt');
+			Swal.fire({
+				title: 'Confirm',
+				text: 'Are you sure you want to logout?',
+				icon: 'question',
+				showCancelButton: true,
+				confirmButtonText: 'Yes'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					document.querySelector('.logout-form').submit();
+				}
+			});
+		}
+	</script>
 </head>
 
 <body>
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="{{ Auth::user()->role === 'admin' ? route('dashboard-admin') : route('dashboard-barberman') }}">
-                    <span class="align-middle">Ryan Barberking</span>
-                </a>
-        </a>
+				<a class="sidebar-brand"
+					href="{{ Auth::user()->role === 'admin' ? route('dashboard-admin') : route('dashboard-barberman') }}">
+					<span class="align-middle">Ryan Barberking</span>
+				</a>
+				</a>
 
 				<ul class="sidebar-nav">
 					<li class="sidebar-header">
 						Pages
 					</li>
-            @if(Auth::check() && Auth::user()->role === 'admin')
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('barberman') }}">
-                                <div class="d-flex align-items-center">
-                                    <i class="align-middle" data-feather="user"></i>
-                                    <span class="align-middle ms-2">Barberman</span>
-                                </div>
-                            </a>
-                        </li>
+					@if(Auth::check() && Auth::user()->role === 'admin')
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ route('barberman') }}">
+								<div class="d-flex align-items-center">
+									<i class="align-middle" data-feather="user"></i>
+									<span class="align-middle ms-2">Barberman</span>
+								</div>
+							</a>
+						</li>
 
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('layanan') }}">
-                                <div class="d-flex align-items-center">
-                                    <i class="align-middle" data-feather="tool"></i>
-                                    <span class="align-middle ms-2">Layanan</span>
-                                </div>
-                             </a>
-                        </li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ route('layanan') }}">
+								<div class="d-flex align-items-center">
+									<i class="align-middle" data-feather="tool"></i>
+									<span class="align-middle ms-2">Layanan</span>
+								</div>
+							</a>
+						</li>
 
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('outlet') }}">
-                                <div class="d-flex align-items-center">
-                                    <i class="align-middle" data-feather="home"></i>
-                                    <span class="align-middle ms-2">Outlet</span>
-                                </div>
-                            </a>
-                        </li>
-            @elseif(Auth::check() && Auth::user()->role === 'barberman')
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('reservation.show') }}">
-                                <div class="d-flex align-items-center">
-                                    <i class="align-middle" data-feather="bookmark"></i>
-                                    <span class="align-middle ms-2">Reservation</span>
-                                </div>
-                            </a>
-                        </li>
-            @endif
-            <ul class="sidebar-nav">
-                <li class="sidebar-header">
-                    Activity
-                </li>
-                <li class="sidebar-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="sidebar-link">
-                            <div class="d-flex align-items-center">
-                                <i class="align-middle" data-feather="log-out"></i>
-                                <span class="align-middle ms-2">Logout</span>
-                            </div>
-                        </button>
-                    </form>
-                </li>
-
-            </ul>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ route('outlet') }}">
+								<div class="d-flex align-items-center">
+									<i class="align-middle" data-feather="home"></i>
+									<span class="align-middle ms-2">Outlet</span>
+								</div>
+							</a>
+						</li>
+					@elseif(Auth::check() && Auth::user()->role === 'barberman')
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ route('reservation.show') }}">
+								<div class="d-flex align-items-center">
+									<i class="align-middle" data-feather="bookmark"></i>
+									<span class="align-middle ms-2">Reservation</span>
+								</div>
+							</a>
+						</li>
+					@endif
+					<ul class="sidebar-nav">
+						<li class="sidebar-header">
+							Activity
+						</li>
+						<li class="sidebar-item">
+							<form method="POST" action="{{ route('logout') }}" class="logout-form">
+								@csrf
+								<button class="sidebar-link" type="button" onclick="confirmLogout()">
+									<div class="d-flex align-items-center">
+										<i class="align-middle" data-feather="log-out"></i>
+										<span class="align-middle ms-2">Logout</span>
+									</div>
+								</button>
+							</form>
+						</li>
+					</ul>	
 
 		</nav>
 
 		<div class="main">
 			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
-                <i class="hamburger align-self-center"></i>
-                </a>
+					<i class="hamburger align-self-center"></i>
+				</a>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -106,44 +125,52 @@
 									<span></span>
 								</div>
 							</a>
-							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
+							<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+								aria-labelledby="alertsDropdown">
 								<div class="dropdown-menu-header">
 									Notifications
 								</div>
 								<div class="list-group">
 									@yield('notifications')
-								<div class="dropdown-menu-footer">
-									<a href="#" class="text-muted">Show all notifications</a>
+									<div class="dropdown-menu-footer">
+										<a href="#" class="text-muted">Show all notifications</a>
+									</div>
 								</div>
-							</div>
 						</li>
-                    <li class="dropdown">
-                        <a class="nav-link d-none d-sm-inline-block d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset(Auth::user()->photo_path) }}" class="avatar img-responsive me-2 rounded-full" alt="{{ Auth::user()->name }}" />
-                                <span class="text-dark indicator">{{ Auth::user()->name }}</span>
-                                <img src="{{ asset('assets/img/svg/arrow-down-339-svgrepo-com.svg') }}" class="h-3 w-3 ml-2" alt="Arrow Down">
-                            </div>
-                        </a>
+						<li class="dropdown">
+							<a class="nav-link d-none d-sm-inline-block d-flex align-items-center" href="#"
+								data-bs-toggle="dropdown">
+								<div class="d-flex align-items-center">
+									<img src="{{ asset(Auth::user()->photo_path) }}"
+										class="avatar img-responsive me-2 rounded-full"
+										alt="{{ Auth::user()->name }}" />
+									<span class="text-dark indicator">{{ Auth::user()->name }}</span>
+									<img src="{{ asset('assets/img/svg/arrow-down-339-svgrepo-com.svg') }}"
+										class="h-3 w-3 ml-2" alt="Arrow Down">
+								</div>
+							</a>
 
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <div class="d-flex align-items-center">
-                                <a class="dropdown-item d-flex align-items-center mr-1" href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-                            </div>
-                            <div class="dropdown-divider"></div>
-                            <form method="POST" action="{{ route('logout') }}" class="dropdown-item">
-                                @csrf
-                                <button type="submit" class="dropdown-item"style="text-decoration: none; border: none; background-color:transparent;">Logout</button>
-                            </form>
-                        </div>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div class="d-flex align-items-center">
+									<a class="dropdown-item d-flex align-items-center mr-1"
+										href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1"
+											data-feather="user"></i> Profile</a>
+								</div>
+								<div class="dropdown-divider"></div>
+								<form method="POST" action="{{ route('logout') }}" class="dropdown-item logout-form">
+									@csrf
+									<button type="button" onclick="confirmLogout()" class="dropdown-item"
+										style="text-decoration: none; border: none; background-color:transparent;">Logout</button>
+								</form>
+							</div>
 
-                    </ul>
+					</ul>
 				</div>
 			</nav>
 
 			<main class="content">
 				<div class="container-fluid p-0 test">
-                    @yield('content')
+					@yield('content')
 				</div>
 			</main>
 
@@ -152,20 +179,21 @@
 					<div class="row text-muted">
 						<div class="col-6 text-start">
 							<p class="mb-0">
-								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Ryan Barberking</strong></a>								&copy;
+								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Ryan
+										Barberking</strong></a> &copy;
 							</p>
-						</div>
 						</div>
 					</div>
 				</div>
-			</footer>
 		</div>
+		</footer>
+	</div>
 	</div>
 
 	<script src="{{asset('static/js/app.js')}}"></script>
 
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("DOMContentLoaded", function () {
 			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
 			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
@@ -235,7 +263,7 @@
 		});
 	</script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("DOMContentLoaded", function () {
 			// Bar chart
 			new Chart(document.getElementById("chartjs-dashboard-bar"), {
 				type: "bar",
@@ -279,26 +307,26 @@
 		});
 	</script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("DOMContentLoaded", function () {
 			var markers = [{
-                    coords: [-6.208763, 106.845599],
-                    name: "Jakarta"
-                },
-                {
-                    coords: [-7.257472, 112.752090],
-                    name: "Surabaya"
-                },
-                {
-                    coords: [-6.917464, 107.619125],
-                    name: "Bandung"
-                },
+				coords: [-6.208763, 106.845599],
+				name: "Jakarta"
+			},
+			{
+				coords: [-7.257472, 112.752090],
+				name: "Surabaya"
+			},
+			{
+				coords: [-6.917464, 107.619125],
+				name: "Bandung"
+			},
 			];
 			var map = new jsVectorMap({
 				map: "world",
 				selector: "#world_map",
 				zoomButtons: true,
 				markers: markers,
-                center: [-2.548926, 118.0148634],
+				center: [-2.548926, 118.0148634],
 				markerStyle: {
 					initial: {
 						r: 9,
@@ -319,7 +347,7 @@
 		});
 	</script>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
+		document.addEventListener("DOMContentLoaded", function () {
 			var date = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000);
 			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
 			document.getElementById("datetimepicker-dashboard").flatpickr({
@@ -328,7 +356,8 @@
 				nextArrow: "<span title=\"Next month\">&raquo;</span>",
 				defaultDate: defaultDate
 			});
-		});
+	</script>
+	});
 	</script>
 
 </body>

@@ -125,11 +125,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($reservation as $reservation)
+                        @foreach($reservation as $reservation_item)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->time }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->layanan->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->barberman->user->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation_item->time }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation_item->layanan->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation_item->barberman->user->name }}</td>
                             </tr>
                         @endforeach
                     </tbody>
