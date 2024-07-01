@@ -8,6 +8,7 @@ use App\Models\Barberman;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -51,7 +52,9 @@ class ReservationController extends Controller
     }
     public function show()
     {
-        $reservation = Reservation::all(); // Adjust this according to your actual retrieval logic
+        $barberman = Barberman::where('user_id', Auth::id())->first();
+        Log::info($barberman->id);
+        $reservation = Reservation::where('barberman_id', $barberman->id)->get(); // Adjust this according to your actual retrieval logic
 
         return view('reservation-show', [
             'reservation' => $reservation,
