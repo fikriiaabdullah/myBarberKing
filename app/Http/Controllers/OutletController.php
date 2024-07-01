@@ -60,7 +60,7 @@ class OutletController extends Controller
             $filePath = $photo->storeAs('outletPictures', $fileName, 'public');
 
             // Optionally, delete the old photo if it exists
-            if ($outlet->photo_path) {
+            if ($outlet->photo_path != 'storage/outletPictures/default_house.jpg') {
                 Storage::disk('public')->delete(str_replace('storage/', '', $outlet->photo_path));
             }
 
