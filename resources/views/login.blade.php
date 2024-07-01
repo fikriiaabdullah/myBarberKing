@@ -15,7 +15,7 @@
         <div class="wrapper">
           <div class="topbar_inner">
             <div class="logo">
-              <a href="#"><img src="{{ asset('assets/about-logo.png') }}" alt="" /></a>
+              <a href="{{route('welcome')}}"><img src="{{ asset('assets/about-logo.png') }}" alt="" /></a>
             </div>
             <div class="brand-name">
                 RYAN BARBERKING
