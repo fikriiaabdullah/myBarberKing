@@ -128,7 +128,7 @@
 
                         <div class="dropdown-menu dropdown-menu-end">
                             <div class="d-flex align-items-center">
-                                <a class="dropdown-item d-flex align-items-center" href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                                <a class="dropdown-item d-flex align-items-center mr-1" href="{{ route('users.edit', Auth::user()->id) }}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
                             </div>
                             <div class="dropdown-divider"></div>
                             <form method="POST" action="{{ route('logout') }}" class="dropdown-item">
@@ -281,51 +281,24 @@
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
 			var markers = [{
-					coords: [31.230391, 121.473701],
-					name: "Shanghai"
-				},
-				{
-					coords: [28.704060, 77.102493],
-					name: "Delhi"
-				},
-				{
-					coords: [6.524379, 3.379206],
-					name: "Lagos"
-				},
-				{
-					coords: [35.689487, 139.691711],
-					name: "Tokyo"
-				},
-				{
-					coords: [23.129110, 113.264381],
-					name: "Guangzhou"
-				},
-				{
-					coords: [40.7127837, -74.0059413],
-					name: "New York"
-				},
-				{
-					coords: [34.052235, -118.243683],
-					name: "Los Angeles"
-				},
-				{
-					coords: [41.878113, -87.629799],
-					name: "Chicago"
-				},
-				{
-					coords: [51.507351, -0.127758],
-					name: "London"
-				},
-				{
-					coords: [40.416775, -3.703790],
-					name: "Madrid "
-				}
+                    coords: [-6.208763, 106.845599],
+                    name: "Jakarta"
+                },
+                {
+                    coords: [-7.257472, 112.752090],
+                    name: "Surabaya"
+                },
+                {
+                    coords: [-6.917464, 107.619125],
+                    name: "Bandung"
+                },
 			];
 			var map = new jsVectorMap({
 				map: "world",
 				selector: "#world_map",
 				zoomButtons: true,
 				markers: markers,
+                center: [-2.548926, 118.0148634],
 				markerStyle: {
 					initial: {
 						r: 9,

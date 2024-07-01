@@ -21,12 +21,12 @@
         @foreach ($reservation as $item)
             <div class="col-span-4 border p-4 rounded-md shadow-md flex justify-between items-center">
                 <div>
-                    <h3 class="font-semibold">{{ $item->name }}</h3>
-                    <p>Phone: {{ $item->phone_number }}</p>
-                    <p>Service Time: {{ $item->time }}</p>
-                    <p>Layanan: {{ $item->layanan->name }}</p>
-                    <p>Barberman: {{ $item->barberman->user->name }}</p>
-                    <p>Outlet: {{ $item->outlet->name }}</p>
+                    <h3 class="font-semibold mb-2">{{ $item->name }}</h3>
+                    <p class="mb-1">Phone: {{ $item->phone_number }}</p>
+                    <p class="mb-1">Service Time: {{ $item->time }}</p>
+                    <p class="mb-1">Layanan: {{ $item->layanan->name }}</p>
+                    <p class="mb-1">Barberman: {{ $item->barberman->user->name }}</p>
+                    <p class="mb-1">Outlet: {{ $item->outlet->name }}</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <form id="delete-form-{{ $item->id }}" action="{{ route('reservation.destroy', $item->id) }}" method="POST">

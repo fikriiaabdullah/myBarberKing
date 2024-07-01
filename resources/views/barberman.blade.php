@@ -29,9 +29,9 @@
                 </div>
                 <div class="flex-grow">
                     <h3 class="font-semibold text-lg">{{ $barberman->user->name }}</h3>
-                    <p class="text-gray-500">{{ $barberman->user->email }}</p>
-                    <p class="text-gray-500">Outlet: {{ $barberman->outlet->name }}</p>
-                    <p class="text-gray-500">Joined: {{ $barberman->created_at->format('d M Y') }}</p>
+                    <p class="text-gray-500 mb-1">Email : {{ $barberman->user->email }}</p>
+                    <p class="text-gray-500 mb-1">Outlet: {{ $barberman->outlet->name }}</p>
+                    <p class="text-gray-500 mb-1">Joined: {{ $barberman->created_at->format('d M Y') }}</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <a href="{{ route('barberman.edit', $barberman->id) }}" class="text-blue-500 hover:text-blue-700 mr-8">
@@ -51,7 +51,7 @@
 </div>
 
 <div class="flex justify-between items-center mb-2 mt-8">
-    <a href="{{ route('barberman.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md" style="text-decoration: none;">Tambah Barberman</a>
+    <a href="{{ route('barberman.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md" style="text-decoration: none;">Add Barberman</a>
 </div>
 
 <script>

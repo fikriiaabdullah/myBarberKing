@@ -21,8 +21,8 @@
         @foreach ($layanan as $item)
             <div class="col-span-4 border p-4 rounded-md shadow-md flex justify-between items-center">
                 <div>
-                    <h3 class="font-semibold">{{ $item->name }}</h3>
-                    <p>Harga: {{ $item->price }}</p>
+                    <h3 class="font-semibold mb-2">{{ $item->name }}</h3>
+                    <p><strong>Price:</strong> IDR. {{ $item->price }},00</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <a href="{{ route('layanan.edit', $item->id) }}" class="text-blue-500 hover:text-blue-700 mr-8">
@@ -42,7 +42,7 @@
 </div>
 
 <div class="flex justify-between items-center mb-2 mt-8">
-    <a href="{{ route('layanan.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md" style="text-decoration: none;">Tambah Layanan</a>
+    <a href="{{ route('layanan.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md" style="text-decoration: none;">Add Layanan</a>
 </div>
 
 <script>

@@ -19,12 +19,12 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($outlet as $item)
-            <div class="col-span-4 border p-4 rounded-md shadow-md flex gap-1 items-center">
+            <div class="col-span-4 border p-4 rounded-md shadow-md flex gap-x-1 gap-y-2">
                 <div>
-                    <img style="max-width: 150px; height: auto; clip-path: xywh(0 5px 100% 75% round 15% 0);" src="{{asset($item->photo_path)}}">
+                    <img style="max-width: 150px; height: auto; clip-path: inset(5px 0 10% 0 round 0 0);" src="{{asset($item->photo_path)}}">
                 </div>
                 <div class="flex-grow">
-                    <h3 class="font-semibold">{{ $item->name }}</h3>
+                    <h3 class="font-semibold mt-2 mb-2" style="font-size: 1rem">{{ $item->name }}</h3>
                     <p>Location : {{ $item->address }}</p>
                 </div>
                 <div class="flex items-center space-x-2">
@@ -45,7 +45,7 @@
 </div>
 
 <div class="flex justify-between items-center mb-2 mt-8">
-    <a href="{{ route('outlet.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md" style="text-decoration: none;">Tambah Outlet</a>
+    <a href="{{ route('outlet.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md" style="text-decoration: none;">Add Outlet</a>
 </div>
 
 <script>
