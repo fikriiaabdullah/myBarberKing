@@ -64,7 +64,7 @@ class ReservationController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'service_time' => 'required|date',
+            'service_time' => 'required|date_format:Y-m-d\TH:i',
             'layanan' => 'required|exists:layanan,id',
             'barberman' => 'required|exists:barberman,id',
             'outlet' => 'required|exists:outlet,id',
@@ -73,7 +73,7 @@ class ReservationController extends Controller
 
         $reservation = Reservation::create([
             'name' => $request->name,
-            'service_time' => $request->service_time,
+            'time' => $request->service_time,
             'layanan_id' => $request->layanan,
             'barberman_id' => $request->barberman,
             'outlet_id' => $request->outlet,
