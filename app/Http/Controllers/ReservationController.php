@@ -42,7 +42,7 @@ class ReservationController extends Controller
             'outlet' => 'required|exists:outlet,id'
         ]);
 
-        $reservation = Reservation::with('layanan', 'barberman')->latest()->get();
+        $reservation = Reservation::select('time', 'layanan_id', 'barberman_id')->where('outlet_id', $request->outlet)->get();
         $layanan = Layanan::all();
         $barbermen = Barberman::where('outlet_id', $request->outlet)->get();
         $outlet = $request->outlet;
