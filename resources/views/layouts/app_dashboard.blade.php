@@ -106,7 +106,7 @@
 								</button>
 							</form>
 						</li>
-					</ul>	
+					</ul>
 
 		</nav>
 
@@ -356,8 +356,7 @@
 				nextArrow: "<span title=\"Next month\">&raquo;</span>",
 				defaultDate: defaultDate
 			});
-	</script>
-	});
+		});
 	</script>
 
 </body>
