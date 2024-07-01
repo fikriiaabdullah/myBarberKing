@@ -126,7 +126,9 @@ class UserController extends Controller
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             // Ambil nama file dan simpan ke database
-
+            if ($user->photo_path != 'storage/userPictures/default_profile.png') {
+                Storage::disk('public')->delete(str_replace('storage/', '', $user->photo_path));
+            }
             $fileName = time() . '_' . $photo->getClientOriginalName();
             $filePath = $photo->storeAs('profilePictures', $fileName, 'public');
             $user->photo_path = 'storage/' . $filePath;
