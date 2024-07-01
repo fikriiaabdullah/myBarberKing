@@ -34,10 +34,10 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="mt-1 mb-3">U have to be waiting mf!!!</h1>
+                        <h1 class="mt-1 mb-3">U have to be waiting 😛😛😛</h1>
                         <div class="mb-0">
-                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
-                            <span class="text-muted">Since last week</span>
+                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i>Wait till your approval</span>
+                            <span class="text-muted">Since last year</span>
                         </div>
                     </div>
                 </div>

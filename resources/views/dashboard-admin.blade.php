@@ -38,7 +38,7 @@
                         </div>
                         <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $barbermenCount }}</h1>
                         <div class="mb-0">
-                            <span class="text-danger" style="font-size: 1rem;"><i class="mdi mdi-arrow-bottom-right"></i> -3.65%</span>
+                            <span class="text-danger" style="font-size: 1rem;"><i class="mdi mdi-arrow-bottom-right"></i> Making </span>
                             <span class="text-muted">Since last week</span>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                         </div>
                         <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $outletCount }}</h1>
                         <div class="mb-0">
-                            <span class="text-success"><i class="mdi mdi-arrow-bottom-right"></i> 5.25%</span>
+                            <span class="text-success"><i class="mdi mdi-arrow-bottom-right"></i> Making </span>
                             <span class="text-muted">Since last week</span>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         </div>
                         <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $layananCount }}</h1>
                         <div class="mb-0">
-                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
+                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> Making </span>
                             <span class="text-muted">Since last week</span>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         </div>
                         <h1 class="mt-1 mb-3" style="font-size: 1.5rem; color: #020202; font-weight: bold;">{{ $reservationCount }}</h1>
                         <div class="mb-0">
-                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> -2.25%</span>
+                            <span class="text-danger"><i class="mdi mdi-arrow-bottom-right"></i> Making </span>
                             <span class="text-muted">Since last week</span>
                         </div>
                     </div>
