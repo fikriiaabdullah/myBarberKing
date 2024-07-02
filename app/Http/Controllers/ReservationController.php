@@ -24,51 +24,53 @@ class ReservationController extends Controller
         ]);
 
         $reservation = Reservation::select('time', 'layanan_id', 'barberman_id')->where('outlet_id', $request->outlet)->get();
-        $barbermanReserved = $reservation[0]->barberman_id;
-        for($i = 1; $i<count($reservation); $i++){
-            $item = $reservation[$i];
-            $barbermanReserved = $barbermanReserved . ',' . $item->barberman_id;
-        }
-        Log::info($barbermanReserved);
-
-        //checking further
         $isLegal = true;
-        $validation_isBarbermanReserved = validator::make($request->all(),[
-            'barberman' => ['in:' . $barbermanReserved]
-        ]);
+        if (count($reservation) > 0) {
+            $barbermanReserved = $reservation[0]->barberman_id;
+            for ($i = 1; $i < count($reservation); $i++) {
+                $item = $reservation[$i];
+                $barbermanReserved = $barbermanReserved . ',' . $item->barberman_id;
+            }
+            Log::info($barbermanReserved);
 
-        if(!$validation_isBarbermanReserved->fails()){
-            foreach($reservation as $item){
-                $startTime = Carbon::parse($item->time);
-                $endTime = (clone $startTime)->addMinutes(20);
-                Log::info('checking A: ' . $startTime);
-                $validator1 = validator::make($request->all(),[
-                    'service_time' => ['before:' . $startTime->subMinutes(20)]
-                ]);
+            //checking further
+            $validation_isBarbermanReserved = validator::make($request->all(), [
+                'barberman' => ['in:' . $barbermanReserved]
+            ]);
 
-                if($validator1->fails()){
-                    Log::info('Test A Failed, trying B: ' . $endTime);
-                    $validator2 = validator::make($request->all(), [
-                        'service_time' => ['after:' . $endTime]
+            if (!$validation_isBarbermanReserved->fails()) {
+                foreach ($reservation as $item) {
+                    $startTime = Carbon::parse($item->time);
+                    $endTime = (clone $startTime)->addMinutes(20);
+                    Log::info('checking A: ' . $startTime);
+                    $validator1 = validator::make($request->all(), [
+                        'service_time' => ['before:' . $startTime->subMinutes(20)]
                     ]);
 
-                    if($validator2->fails()){
-                        $isLegal = false;
+                    if ($validator1->fails()) {
+                        Log::info('Test A Failed, trying B: ' . $endTime);
+                        $validator2 = validator::make($request->all(), [
+                            'service_time' => ['after:' . $endTime]
+                        ]);
+
+                        if ($validator2->fails()) {
+                            $isLegal = false;
+                            break;
+                        }
+                    } else {
                         break;
                     }
-                }else{
-                    break;
                 }
             }
         }
 
-        if($isLegal){
+        if ($isLegal) {
             $layanan = $request->layanan;
             $barbermen = $request->barberman;
             $outlet = $request->outlet;
             $service_time = $request->service_time;
             return view('reservation', compact('layanan', 'barbermen', 'outlet', 'service_time'));
-        }else{
+        } else {
             $reservation = Reservation::select('time', 'layanan_id', 'barberman_id')->where('outlet_id', $request->outlet)->get();
             $layanan = Layanan::all();
             $barbermen = Barberman::where('outlet_id', $request->outlet)->get();
