@@ -17,6 +17,7 @@ class Reservation extends Model
         'layanan_id',
         'barberman_id',
         'outlet_id',
+        'phone_number'
     ];
 
     public function layanan()

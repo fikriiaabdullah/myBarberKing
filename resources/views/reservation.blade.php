@@ -15,95 +15,44 @@
     <div class="container mx-auto mt-10">
         <div class="bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-2xl font-semibold mb-4">Create Reservation</h1>
+            <h3>Step 3/3 - Choose service & barberman</h3>
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4"
                     role="alert">
                     <p class="text-sm">{{ session('success') }}</p>
                 </div>
             @endif
-            <form action="{{ route('reservation.store') }}" method="POST">
+            <form class="flex flex-col" action="{{ route('reservation.store') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <div style="position: absolute; left: -9999px;">
+                    <input type="text" name="outlet" value="{{$outlet}}">
+                </div>
+                <div style="position: absolute; left: -9999px;">
+                    <input type="text" name="layanan" value="{{$layanan}}">
+                </div>
+                <div style="position: absolute; left: -9999px;">
+                    <input type="text" name="barberman" value="{{$barbermen}}">
+                </div>
+                <div style="position: absolute; left: -9999px;">
+                    <input type="datetime-local" name="service_time" value="{{$service_time}}">
+                </div>
+                <div class="mb-4 w-full">
+                    <label for="name" class="text-sm font-medium text-gray-700">Name</label>
                     <input type="text" name="name" id="name"
-                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        class="mt-1 p-2 w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         required>
                 </div>
-                <div class="mb-4">
-                    <label for="service_time" class="block text-sm font-medium text-gray-700">Service Time</label>
-                    <input type="datetime-local" name="service_time" id="service_time"
-                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                <div class="mb-4 w-full">
+                    <label for="phone" class="text-sm font-medium text-gray-700">Phone</label>
+                    <input type="tel" name="phone" id="phone"
+                        class="mt-1 p-2 w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         required>
-                </div>
-                <div class="mb-4">
-                    <label for="layanan" class="block text-sm font-medium text-gray-700">Layanan</label>
-                    <select name="layanan" id="layanan"
-                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required>
-                        @foreach($layanan as $service)
-                            <option value="{{ $service->id }}">{{ $service->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="barberman" class="block text-sm font-medium text-gray-700">Barberman</label>
-                    <select name="barberman" id="barberman"
-                        class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        required>
-                        @foreach($barbermen as $barberman)
-                            <option value="{{ $barberman->id }}">{{ $barberman->user->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="outlet" class="block text-sm font-medium text-gray-700">Outlet</label>
-                    <select name="outlet" id="outlet"
-                            class="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            required>
-                        @foreach($outlet as $outlets)
-                            <option value="{{ $outlets->id }}">{{ $outlets->name }}</option>
-                        @endforeach
-                    </select>
                 </div>
 
                 <button type="submit"
                     class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">Create
                     Reservation</button>
             </form>
-        </div>
-        <div class="mt-10">
-            <h1 class="text-2xl font-semibold mb-4">Reservations List</h1>
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                    <thead class="bg-gray-200">
-                        <tr>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service
-                                Time</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Layanan</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barberman</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Outlet</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($reservation as $reservation)
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->service_time }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->layanan->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->barberman->user->name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->outlet->name }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 

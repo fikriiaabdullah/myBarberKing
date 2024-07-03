@@ -13,6 +13,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 Route::get('/login',[UserController::class, 'login'])->name('login');
+Route::get('/reservation/outlet',[ReservationController::class, 'chooseOutlet'])->name('reservation.outlet');
+Route::get('/reservation/service-barberman',[ReservationController::class, 'chooseServiceBarberman'])->name('reservation.service.barberman');
 Route::get('/reservation',[ReservationController::class, 'reservation'])->name('reservation');
 Route::post('/reservation/create',[ReservationController::class, 'store'])->name('reservation.store');
 Route::post('/login', [UserController::class, 'processLogin'])->name('processLogin');
@@ -27,9 +29,7 @@ Route::middleware(['auth'])->group(function() {
     })->name('dashboard-karyawan');
 });
 Route::middleware([isAdmin::class])->group(function( ){
-    Route::get('/dashboard', function () {
-        return view('dashboard-admin');
-    })->name('dashboard-admin');
+    Route::get('/dashboard', [UserController::class, 'count'])->name('dashboard-admin');
     Route::get('/barberman', [BarbermanController::class, 'index'])->name('barberman');
     Route::get('/outlet', [OutletController::class, 'index'])->name('outlet');
     Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
@@ -50,9 +50,7 @@ Route::middleware([isAdmin::class])->group(function( ){
     Route::delete('/barberman/{barberman}', [BarbermanController::class, 'destroy'])->name('barberman.destroy');
 });
 Route::middleware([isBarberman::class])->group(function( ){
-    Route::get('/dashboard/barberman', function () {
-        return view('dashboard-barberman');
-    })->name('dashboard-barberman');
+    Route::get('/dashboard/barberman', [BarbermanController::class, 'count'])->name('dashboard-barberman');
     Route::get('/reservation/show',[ReservationController::class, 'show'])->name('reservation.show');
     Route::delete('/reservation/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });

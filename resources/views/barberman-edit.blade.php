@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_dashboard')
 
 @section('title', 'Edit Barberman')
 
@@ -25,7 +25,7 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <a href="{{ route('barberman') }}" class="mr-4 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-md">Cancel</a>
+                <a href="{{ route('barberman') }}" class="mr-4 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-md " style="text-decoration: none;">Cancel</a>
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">Update Barberman</button>
             </div>
         </form>

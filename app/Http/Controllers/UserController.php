@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Outlet;
+use App\Models\Layanan;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -30,7 +33,6 @@ class UserController extends Controller
             } else if ($user->role == 'barberman') {
                 return redirect()->route('dashboard-barberman');
             } else {
-                // Handle other roles as needed, for example redirecting to a general dashboard
                 return redirect()->route('dashboard-karyawan');
             }
         }
@@ -38,6 +40,27 @@ class UserController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+    public function count()
+    {
+        $barbermenCount = User::where('role', 'barberman')->count();
+
+        // Hitung jumlah outlet
+        $outletCount = Outlet::count();
+
+        // Hitung jumlah reservasi
+        $reservationCount = Reservation::count();
+
+        $layananCount = Layanan::count();
+
+        $notificationData = '';
+        $user = Auth::user();
+        if($user->role == 'admin'){
+            $notificationData = User::where('role', 'karyawan')->pluck('name');
+        }
+
+        // Kirim data ke view
+        return view('dashboard-admin', compact('barbermenCount', 'outletCount', 'reservationCount', 'layananCount', 'notificationData'));
     }
 
     public function register(Request $request)
@@ -103,7 +126,9 @@ class UserController extends Controller
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             // Ambil nama file dan simpan ke database
-
+            if ($user->photo_path != 'storage/profilePictures/default_profile.png') {
+                Storage::disk('public')->delete(str_replace('storage/', '', $user->photo_path));
+            }
             $fileName = time() . '_' . $photo->getClientOriginalName();
             $filePath = $photo->storeAs('profilePictures', $fileName, 'public');
             $user->photo_path = 'storage/' . $filePath;
